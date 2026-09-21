@@ -1,11 +1,12 @@
 import integration
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.patches import Polygon
 
-def f1(x):
+def f1(x: float) -> float:
     return np.sin(x)
 
-def f2(x):
+def f2(x: float) -> float:
     return 1 / (1 + x**2)
 
 def main():
@@ -75,6 +76,49 @@ def main():
     ax2.set_xlabel("N") 
     ax2.set_ylabel("Signed error")
     plt.show()
+
+    ## Part 3
+    a = 0
+    b = np.pi/3
+    h = (b-a) / 16
+    x = np.linspace(a, b, 400)
+    y = f1(x)
+    fig2 = plt.figure()
+    ax3 = fig2.add_subplot()
+
+    ax3.plot(x, y, label="f1(x) = sin(x)")
+
+    xLeft = np.linspace(a1, b1 - h, 16)
+
+    ax3.bar(xLeft, f1(xLeft), width = h, align = "edge",
+        facecolor = "blue", alpha = 0.3, edgecolor = "black",
+        linewidth = 1.2, label="Left Rectangles"
+    )
+
+    for i in range(16):
+        x0 = a + i*h
+        x1 = x0 + h
+
+        trapPoints = [
+            (x0, 0),
+            (x0, f1(x0)),
+            (x1, f1(x1)),
+            (x1, 0)
+        ]
+
+        polygon = Polygon(trapPoints, closed = True, alpha = 0.3, edgecolor = "black",
+                          facecolor = "red", linewidth = 1.2)
+
+        ax3.add_patch(polygon)
+
+    ax3.plot([], [], color="red", label="Trapezoids")
+    ax3.set_xlabel("x")
+    ax3.set_ylabel("f1(x)")
+    ax3.legend()
+
+    plt.show()
+
+
 if __name__ == "__main__":
     main()
-        
+
