@@ -56,6 +56,7 @@ def main():
     fig1 = plt.figure()
     ax1 = fig1.add_subplot(1,2,1)
     ax2 = fig1.add_subplot(1,2,2)
+    fig1.subplots_adjust(left=0.08, right=0.98, bottom=0.12, top=0.92, wspace=.48)
     
     ax1.plot(Nvals, leftVals1Error, label = "Left")
     ax1.plot(Nvals, rightVals1Error, label = "Right")    
@@ -77,7 +78,7 @@ def main():
     ax2.set_ylabel("Signed error")
     plt.show()
 
-    ## Part 3
+
     a = 0
     b = np.pi/3
     h = (b-a) / 16
@@ -98,7 +99,6 @@ def main():
     for i in range(16):
         x0 = a + i*h
         x1 = x0 + h
-
         trapPoints = [
             (x0, 0),
             (x0, f1(x0)),
