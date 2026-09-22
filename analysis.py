@@ -17,7 +17,7 @@ def main():
     a2 = 0
     b2 = 1
     Nvals = [10, 20, 40, 80, 160, 320, 640, 1280]
-
+    
     leftVals1 = []
     midVals1 = []
     rightVals1 = []
@@ -46,6 +46,17 @@ def main():
     rightVals1Error = np.array(rightVals1) - f1IntegralVal
     simpsonVals1Error = np.array(simpsonVals1) - f1IntegralVal
     trapezoidVals1Error = np.array(trapezoidVals1) - f1IntegralVal
+
+
+
+    for i in range(len(Nvals)):
+        N = Nvals[i]
+        h = (b1 - a1) / N
+        measured = rightVals1[i] - leftVals1[i]
+        expected = h * (f1(b1) - f1(a1))
+        print("N =", N)
+        print("Measured difference:", measured)
+        print("Expected difference:", expected)
 
     leftVals2Error = np.array(leftVals2) - f2IntegralVal
     midVals2Error = np.array(midVals2) - f2IntegralVal
@@ -119,6 +130,12 @@ def main():
     plt.show()
 
 
+
+
+    
+
+
 if __name__ == "__main__":
     main()
+
 
